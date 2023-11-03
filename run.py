@@ -25,6 +25,7 @@ def play_round():
     Displays question with the set of choices
     On wrong response, player is provided with the correct answer
     """
+    score = 0
     for question_data in easy_questions:  # Easy questions from questions.py stored into variables
         easy_question = question_data['question']
         easy_choices = question_data['choices']
@@ -38,9 +39,13 @@ def play_round():
 
         if player_answer == easy_answer:  # Statement to check if user answer matches
             print("Correct")
+            score += 100
+            continue 
         else:
             print(f"Wrong answer\nCorrect answer was: {easy_answer}")
         break
 
+    print("Thank you for playing, better luck next time!\n")
+    print(f"Your score was: {score}")
+
 main()
-print("Thank you for playing, better luck next time!")
