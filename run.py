@@ -1,5 +1,6 @@
 import random
 from questions import easy_questions
+from error_handling import get_players_answer
 random.shuffle(easy_questions)
 
 def main():
@@ -25,20 +26,21 @@ def play_round():
     Displays question with the set of choices
     On wrong response, player is provided with the correct answer
     """
+    
     score = 0
     for question_data in easy_questions:  # Easy questions from questions.py stored into variables
         easy_question = question_data['question']
         easy_choices = question_data['choices']
         easy_answer = question_data['answer']
     
-        print(easy_question) 
+        print(f"{easy_question}\n") 
         for choice in easy_choices: 
-            print(choice)
-    
-        player_answer = input("Choose an answer (A, B, C or D): ")
-
+            print(f"{choice}\n")
+        
+        player_answer = get_players_answer()
+        
         if player_answer == easy_answer:  # Statement to check if user answer matches
-            print("Correct")
+            print("Correct\n")
             score += 100
             continue 
         else:
