@@ -2,7 +2,6 @@ import time
 import random
 from questions import easy_questions
 from error_handling import get_players_answer
-random.shuffle(easy_questions)
 
 def main():
     """
@@ -32,6 +31,7 @@ def play_round():
     Displays question with the set of choices
     On wrong response, player is provided with the correct answer
     """
+    random.shuffle(easy_questions)
     score = 0
     for question_data in easy_questions:  # Easy questions from questions.py stored into variables
         easy_question = question_data['question']
@@ -60,9 +60,19 @@ def play_round():
             time.sleep(1)
             print("....\n")
             time.sleep(1)
-            print(f"\nWrong answer\nCorrect answer was: {easy_answer}\n")
+            print(f"\nWrong answer\n\nCorrect answer was: {easy_answer}\n")
         break
     print("Thank you for playing, better luck next time!\n")
     print(f"Your score was: {score}$\n")
+    play_again = input("Play again? [Yes][No]")
+    
+    if play_again == "Yes":
+        print("\nHere..\n")
+        time.sleep(0.5)
+        print("We...\n")
+        time.sleep(0.5)
+        print("Go!\n")
+        play_round()
+
 
 main()
