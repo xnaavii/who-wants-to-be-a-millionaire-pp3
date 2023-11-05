@@ -2,9 +2,26 @@ import time
 import random
 import os
 import platform
+import gspread 
+from google.oauth2.service_account import Credentials
 from game.questions import easy_questions, normal_questions, hard_questions
 from game.error_handling import get_players_answer, get_player_name, play_again, play_rules, get_player_difficulty
 from game.prizes import prizes
+
+# Set up google sheet credentials
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+CREDS = Credentials.from_service_account_file("creds.json")
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open("highscore_pp3")
+
+highscore = SHEET.worksheet("highscore")
+highscore_data = highscore.get_all_values()
+print(highscore_data)
 
 def clear_terminal():
     if platform.system() == "Windows":
@@ -77,7 +94,7 @@ def play_round(player_name, difficulty="Easy"):
         for choice in choices: 
             print(f"{choice}\n")
             time.sleep(0.5)
-        
+
         player_answer = get_players_answer()
         
         if player_answer == answer:  # Statement to check if user answer matches
