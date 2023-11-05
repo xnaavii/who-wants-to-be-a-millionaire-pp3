@@ -18,11 +18,11 @@ def play_rules():
     valid_response = ["Play", "Rules"]
     while True:
         try:
-            select_screen = input("Please select: [Play][Rules]: ").capitalize()
+            select_screen = input("Please select [Play][Rules]: ").capitalize()
             if select_screen in valid_response:
                 return select_screen
             else:
-                print("Invalid selection. Please select [Play] or [Rules]\n")
+                print("Invalid selection. Please select [Play] or [Rules]: ")
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -31,6 +31,14 @@ def get_player_name():
     return name
 
 def play_again(player_name):
-    play_again = input(f"{player_name} Would you like to play again? [Yes][No]")
-    # Validate input
-    return play_again
+    # Error handling for play again instance
+    play_again_response = ["Yes", "No"]
+    while True:
+        try:
+            play_again = input(f"{player_name} Would you like to play again? [Yes][No]: ").capitalize()
+            if play_again in play_again_response:
+                return play_again
+            else:
+                print("Invalid selection. Please select [Yes] or [No]: ")
+        except Exception as e:
+            print(f"An error occured: {e}")

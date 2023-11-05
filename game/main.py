@@ -10,7 +10,6 @@ def main():
     """
     print("\nWelcome to Who Wants To Be A Millionaire")
     time.sleep(0.5)
-    print("\nSelect")
     select_screen = play_rules()
     time.sleep(0.5)
     if select_screen == "Play":
@@ -21,8 +20,9 @@ def main():
         print("Go!\n")
         game_setup() # Game starts 
     elif select_screen == "Rules":
-        print("Rules for 'Who Wants to Be a Millionaire?' Game:")
+        print("Rules for 'Who Wants to Be a Millionaire?' Game\n")
         print("Objective: The objective of the game is to answer a series of multiple-choice questions correctly to accumulate as much money as possible.\n")
+        game_setup()
 
 def game_setup():
     player_name = get_player_name()
@@ -45,12 +45,12 @@ def play_round(player_name, difficulty="easy"):
         choices = question_data['choices']
         answer = question_data['answer']
 
-        time.sleep(1)
+        time.sleep(0.8)
         print(f"\n{question}\n") 
-        time.sleep(1)
+        time.sleep(0.8)
         for choice in choices: 
             print(f"{choice}\n")
-            time.sleep(1)
+            time.sleep(0.8)
         
         player_answer = get_players_answer()
         
@@ -61,7 +61,7 @@ def play_round(player_name, difficulty="easy"):
             time.sleep(0.5)
             score += 100
             time.sleep(0.5)
-            print(f"\nCorrect answer, {player_name}! Your score is {score}$\n") # Show player name and score during gameplay
+            print(f"Correct answer, {player_name}! Your score is {score}$\n") # Show player name and score during gameplay
             time.sleep(0.5)
             continue
         else:
@@ -81,3 +81,5 @@ def play_round(player_name, difficulty="easy"):
         time.sleep(0.5)
         print("Go!\n")
         play_round(player_name)
+    elif again == "No":
+        main()
