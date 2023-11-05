@@ -15,6 +15,9 @@ def get_players_answer():
             print(f"An error occurred: {e}")
 
 def play_rules():
+    """
+    Handles the error on play_rules input
+    """
     valid_response = ["Play", "Rules"]
     while True:
         try:
@@ -31,6 +34,9 @@ def get_player_name():
     return name
 
 def get_player_difficulty():
+    """
+    Validate the user input on difficulty instance
+    """
     valid_difficulty = ["Easy", "Normal", "Hard"]
     while True:
         difficulty = input("\nChoose difficulty [Easy][Normal][Hard]: ").capitalize()

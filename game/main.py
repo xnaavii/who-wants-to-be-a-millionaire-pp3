@@ -1,7 +1,16 @@
 import time
 import random
+import os
+import platform
 from game.questions import easy_questions, normal_questions, hard_questions
 from game.error_handling import get_players_answer, get_player_name, play_again, play_rules, get_player_difficulty
+from game.prizes import prizes
+
+def clear_terminal():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 def main():
     """
@@ -25,6 +34,10 @@ def main():
         game_setup()
 
 def game_setup():
+    """
+    Asks for user name and difficulty
+    After the required input, game starts
+    """
     player_name = get_player_name()
     # Get difficulty
     difficulty = get_player_difficulty()
@@ -48,14 +61,17 @@ def play_round(player_name, difficulty="Easy"):
         questions = hard_questions
     
     random.shuffle(questions)
-
     for question_data in questions: # Questions from questions.py stored into variables
+        time.sleep(0.7)
+        clear_terminal()
         question = question_data['question']
         choices = question_data['choices']
         answer = question_data['answer']
 
+        print(f"Player: {player_name}")
+        print(f"Current score: {score}$\n")
         time.sleep(0.5)
-        print(f"\n{question}\n") 
+        print(f"{question}\n") 
         time.sleep(0.5)
         for choice in choices: 
             print(f"{choice}\n")
@@ -68,10 +84,10 @@ def play_round(player_name, difficulty="Easy"):
             time.sleep(0.3)
             print("....\n")
             time.sleep(0.3)
-            score += 100
+            score += prizes[correct_answers]
             correct_answers += 1
             time.sleep(0.3)
-            print(f"Correct answer, {player_name}! Your score is {score}$\n") # Show player name and score during gameplay
+            print(f"Correct answer, {player_name}!") # Show player name and score during gameplay
             time.sleep(0.5)
             continue
         elif player_answer != answer:
@@ -79,14 +95,14 @@ def play_round(player_name, difficulty="Easy"):
             time.sleep(0.3)
             print("....\n")
             time.sleep(0.3)
-            print(f"\nWrong answer\n\nC33333mfsdklmckladmkdlamlkamlaoirrect answer was: {answer}\n")
+            print(f"\nWrong answer\n\nCorrect answer was: {answer}\n")
         break
     
     if correct_answers == len(questions): # Checks if all questions are answered
-        print("You're a millionaire!\n")
-
-    print("Thank you for playing!\n")
-    print(f"Your score was: {score}$\n")
+        print(f"You're a millionaire! {score}\n")
+    else:
+        print("Thank you for playing!\n")
+        print(f"Your score was: {score}$\n")
     
     again = play_again(player_name) # Validate user input on play again
     if again == "Yes":
