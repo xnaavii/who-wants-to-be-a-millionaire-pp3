@@ -67,9 +67,10 @@ def play_round(player_name, difficulty="Easy"):
         question = question_data['question']
         choices = question_data['choices']
         answer = question_data['answer']
-
+        
         print(f"Player: {player_name}")
-        print(f"Current score: {score}$\n")
+        print(f"Difficulty: {difficulty}")
+        print(f"Current score: ${score}\n")
         time.sleep(0.5)
         print(f"{question}\n") 
         time.sleep(0.5)
@@ -84,10 +85,10 @@ def play_round(player_name, difficulty="Easy"):
             time.sleep(0.3)
             print("....\n")
             time.sleep(0.3)
-            score += prizes[correct_answers]
-            correct_answers += 1
+            score = prizes[correct_answers]
+            correct_answers += 1 # Keep count of the correct answers
             time.sleep(0.3)
-            print(f"Correct answer, {player_name}!") # Show player name and score during gameplay
+            print(f"Correct answer, {player_name}!\n") # Show player name and score during gameplay
             time.sleep(0.5)
             continue
         elif player_answer != answer:
@@ -98,11 +99,13 @@ def play_round(player_name, difficulty="Easy"):
             print(f"\nWrong answer\n\nCorrect answer was: {answer}\n")
         break
     
-    if correct_answers == len(questions): # Checks if all questions are answered
-        print(f"You're a millionaire! {score}\n")
+    if correct_answers == 10: # Checks if all questions are answered
+        print(f"Congratulations! You've won ${score}\n")
+    elif correct_answers >= 1:
+        print(f"{player_name}, you've secured at least ${prizes[correct_answers -1]}.\n")
     else:
-        print("Thank you for playing!\n")
-        print(f"Your score was: {score}$\n")
+        print("Sorry, you didn't win anything.\n")
+    print("Thank you for playing!\n")
     
     again = play_again(player_name) # Validate user input on play again
     if again == "Yes":
@@ -113,4 +116,5 @@ def play_round(player_name, difficulty="Easy"):
         print("Go!\n")
         play_round(player_name)
     elif again == "No":
+        clear_terminal()
         main()
