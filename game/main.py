@@ -1,7 +1,7 @@
 import time
 import random
-from game.questions import easy_questions
-from game.error_handling import get_players_answer, get_player_name, play_again, play_rules
+from game.questions import easy_questions, normal_questions, hard_questions
+from game.error_handling import get_players_answer, get_player_name, play_again, play_rules, get_player_difficulty
 
 def main():
     """
@@ -20,27 +20,34 @@ def main():
         print("Go!\n")
         game_setup() # Game starts 
     elif select_screen == "Rules":
-        print("Rules for 'Who Wants to Be a Millionaire?' Game\n")
+        print("\nRules for 'Who Wants to Be a Millionaire?' Game\n")
         print("Objective: The objective of the game is to answer a series of multiple-choice questions correctly to accumulate as much money as possible.\n")
         game_setup()
 
 def game_setup():
     player_name = get_player_name()
     # Get difficulty
-    # difficulty = get_player_difficulty()
-    play_round(player_name)
+    difficulty = get_player_difficulty()
+    play_round(player_name, difficulty)
 
-def play_round(player_name, difficulty="easy"):
+def play_round(player_name, difficulty="Easy"):
     """
     Game logic for when the game starts
     Displays question with the set of choices
     On wrong response, player is provided with the correct answer
     """
-    if difficulty == "easy":
-        questions = easy_questions
-    random.shuffle(questions)
     score = 0
-    for question_data in questions:  # Easy questions from questions.py stored into variables
+    questions = 0
+    # Questions are extracted based on game difficulty
+    if difficulty == "Easy":
+        questions = easy_questions
+    elif difficulty == "Normal":
+        questions = normal_questions
+    elif difficulty == "Hard":
+        questions = hard_questions
+    
+    random.shuffle(questions)
+    for question_data in questions: # Questions from questions.py stored into variables
         question = question_data['question']
         choices = question_data['choices']
         answer = question_data['answer']
@@ -73,7 +80,7 @@ def play_round(player_name, difficulty="easy"):
         break
     print("Thank you for playing, better luck next time!\n")
     print(f"Your score was: {score}$\n")
-    again = play_again(player_name)
+    again = play_again(player_name) # Validate user input on play again
     if again == "Yes":
         print("\nHere..\n")
         time.sleep(0.5)

@@ -18,7 +18,7 @@ def play_rules():
     valid_response = ["Play", "Rules"]
     while True:
         try:
-            select_screen = input("Please select [Play][Rules]: ").capitalize()
+            select_screen = input("\nPlease select [Play][Rules]: ").capitalize()
             if select_screen in valid_response:
                 return select_screen
             else:
@@ -30,12 +30,21 @@ def get_player_name():
     name = input("Enter your name: ")
     return name
 
+def get_player_difficulty():
+    valid_difficulty = ["Easy", "Normal", "Hard"]
+    while True:
+        difficulty = input("\nChoose difficulty [Easy][Normal][Hard]: ").capitalize()
+        if difficulty in valid_difficulty:
+            return difficulty
+        else:
+            print("Invalid selection. Please select [Easy],[Medium] or [Hard]")
+
 def play_again(player_name):
     # Error handling for play again instance
     play_again_response = ["Yes", "No"]
     while True:
         try:
-            play_again = input(f"{player_name} Would you like to play again? [Yes][No]: ").capitalize()
+            play_again = input(f"{player_name}, Would you like to play again? [Yes][No]: ").capitalize()
             if play_again in play_again_response:
                 return play_again
             else:
