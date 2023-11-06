@@ -18,14 +18,14 @@ def play_rules():
     """
     Handles the error on play_rules input
     """
-    valid_response = ["Play", "Rules"]
+    valid_response = ["Play", "Rules", "Highscore"]
     while True:
         try:
-            select_screen = input("\nPlease select [Play][Rules]: ").capitalize()
+            select_screen = input("\nPlease select [Play][Rules][Highscore]: ").capitalize()
             if select_screen in valid_response:
                 return select_screen
             else:
-                print("Invalid selection. Please select [Play] or [Rules]: ")
+                print("Invalid selection. Please select [Play],[Rules] or [Highscore]: ")
         except Exception as e:
             print(f"An error occured: {e}")
 

@@ -2,26 +2,11 @@ import time
 import random
 import os
 import platform
-import gspread 
-from google.oauth2.service_account import Credentials
+from game.google_sheet import append_highscore #show_highscore
 from game.questions import easy_questions, normal_questions, hard_questions
 from game.error_handling import get_players_answer, get_player_name, play_again, play_rules, get_player_difficulty
 from game.prizes import prizes
-
-# Set up google sheet credentials
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-CREDS = Credentials.from_service_account_file("creds.json")
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open("highscore_pp3")
-
-highscore = SHEET.worksheet("highscore")
-highscore_data = highscore.get_all_values()
-print(highscore_data)
+# google_sheet() 
 
 def clear_terminal():
     if platform.system() == "Windows":
@@ -47,8 +32,11 @@ def main():
         game_setup() # Game starts 
     elif select_screen == "Rules":
         print("\nRules for 'Who Wants to Be a Millionaire?' Game\n")
-        print("Objective: The objective of the game is to answer a series of multiple-choice questions correctly to accumulate as much money as possible.\n")
+        print("Objective: The objective of the game is to answer a series of\nmultiple-choice questions correctly to accumulate as much money as possible.\n")
         game_setup()
+    elif select_screen == "Highscore":
+        pass
+        # show_highscore()
 
 def game_setup():
     """
@@ -117,11 +105,13 @@ def play_round(player_name, difficulty="Easy"):
         break
     
     if correct_answers == 10: # Checks if all questions are answered
+        score = 10000000
         print(f"Congratulations! You've won ${score}\n")
     elif correct_answers >= 1:
         print(f"{player_name}, you've secured at least ${prizes[correct_answers -1]}.\n")
     else:
         print("Sorry, you didn't win anything.\n")
+    append_highscore(player_name, difficulty, score)
     print("Thank you for playing!\n")
     
     again = play_again(player_name) # Validate user input on play again
