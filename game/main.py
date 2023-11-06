@@ -126,7 +126,6 @@ def play_round(player_name, difficulty="easy"):
     else:
         print("Sorry, you didn't win anything.\n")
     append_highscore(player_name, difficulty, score)
-    print("Thank you for playing!\n")
 
     again = play_again(player_name)  # Validate user input on play again
     if again == "yes":
@@ -138,8 +137,10 @@ def play_round(player_name, difficulty="easy"):
         play_round(player_name)
     elif again == "no":
         clear_terminal()
-        main()
+        # Quit the game after user input
+        quit_game()
 
-
-# def quit_game():
-# pass
+def quit_game():
+    # Function to quit the game
+    print("Thank you for playing!\n")
+    quit()
