@@ -1,6 +1,9 @@
 import gspread
+import colorama
 from google.oauth2.service_account import Credentials
+from colorama import Fore, Back, Style, init
 
+init()
 # Set up google sheet credentials
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -51,7 +54,7 @@ def show_highscore():
             valid_scores.sort(key=lambda x: int(x[2]), reverse=True)
 
             # Display the top 5 high scores for the current difficulty
-            print(f"\nTop 5 High Scores for {difficulty} Difficulty:")
+            print(Fore.YELLOW + f"\nTop 5 High Scores for {difficulty.capitalize()} Difficulty:" + Style.RESET_ALL)
             for rank, item in enumerate(valid_scores[:5], start=1):
                 player_name, _, score = item
                 print(f"{rank}. Name: {player_name}, Score: {score}")
@@ -70,7 +73,7 @@ def show_highscore():
                             break
                     
                     # Calculate the row number to remove
-                    row_to_remove = show_score.index(valid_scores[low_score_index]) + 2
+                    row_to_remove = show_score.index(valid_scores[lowest_top_score]) + 2
                     # Delete the lowest score
                     highscore_sheet.delete_rows(row_to_remove)
                     # Append the updated top 5 scores
