@@ -34,6 +34,11 @@ def append_highscore(player_name, difficulty, score):
 
 
 def show_highscore():
+    """
+    Function to show user highscore on game startup selection
+    Shows Top 5 high scores in each difficulty 
+    Replaces the list with the new highscore (if achieved)
+    """
     # List of difficulty levels
     difficulties = ["easy", "normal", "hard"]
     

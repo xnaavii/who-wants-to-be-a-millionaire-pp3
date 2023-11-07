@@ -129,9 +129,8 @@ def play_round(player_name, difficulty="easy"):
         print("Congratulations! You've won ", end="")
         print(Fore.GREEN + f"${score}\n" + Style.RESET_ALL)    
     elif correct_answers >= 1:
-        print(
-            f"{player_name}, you've secured at least ${prizes[correct_answers -1]}.\n"
-        )
+        print(f"{player_name}, you've secured at least ", end="") 
+        print(Fore.GREEN + f"${prizes[correct_answers -1]}.\n" + Style.RESET_ALL)
     else:
         print("Sorry, you didn't win anything.\n")
     append_highscore(player_name, difficulty, score)

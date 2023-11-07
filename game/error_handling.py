@@ -64,6 +64,7 @@ def play_again(player_name):
             if play_again in play_again_response:
                 return play_again
             else:
-                print("Invalid selection. Please select [Yes] or [No]: ")
+                print(Fore.RED + "\nInvalid selection. ", end="" + Style.RESET_ALL)
+                print(Style.DIM + "Please select [Yes] or [No]: \n" + Style.RESET_ALL)
         except Exception as e:
             print(f"An error occured: {e}")
