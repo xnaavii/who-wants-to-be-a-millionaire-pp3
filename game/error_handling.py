@@ -23,7 +23,6 @@ def play_rules():
     while True:
         try:
             select_screen = input("\nPlease select [Play][Rules][Highscore]: ").lower()
-            print(select_screen)
             if select_screen in valid_response:
                 return select_screen
             else:
