@@ -13,7 +13,7 @@ def get_players_answer():
         try:
             player_answer = (
                 input(
-                    Style.DIM + "Choose an answer (A, B, C or D): "
+                    Fore.LIGHTWHITE_EX + "Choose an answer (A, B, C or D): "
                     + Style.RESET_ALL
                 )
                 .upper()
@@ -42,7 +42,7 @@ def play_rules():
             print("\nPlease select ", end="")
             select_screen = (
                 input(
-                    Fore.MAGENTA + "[Play][Rules][Highscore]: "
+                    Fore.LIGHTYELLOW_EX + "[Play][Rules][Highscore]: "
                     + Style.RESET_ALL
                     )
                 .lower()
@@ -51,13 +51,16 @@ def play_rules():
             if select_screen in valid_response:
                 return select_screen
             else:
-                print(Fore.RED + "Invalid selection." + Style.RESET_ALL)
+                print(Fore.RED + "Invalid selection. ", end ="" + Style.RESET_ALL)
+                print("Please enter [Play][Rules][Highscore]")
         except Exception as e:
             print(f"An error occured: {e}")
 
 
 def get_player_name():
     name = input("Enter your name: ")
+    if name == "":
+        name = None
     return name
 
 
@@ -69,14 +72,15 @@ def get_player_difficulty():
     while True:
         print("\nChoose difficulty ", end="")
         difficulty = (
-            input(Fore.MAGENTA + "[Easy][Normal][Hard]: " + Style.RESET_ALL)
+            input(Fore.LIGHTYELLOW_EX + "[Easy][Normal][Hard]: " + Style.RESET_ALL)
             .lower()
             .strip()
         )
         if difficulty in valid_difficulty:
             return difficulty
         else:
-            print(Fore.RED + "Invalid selection." + Style.RESET_ALL)
+            print(Fore.RED + "Invalid selection. ", end="" + Style.RESET_ALL)
+            print("Please choose [Easy][Normal][Hard]")
 
 
 def play_again(player_name):
