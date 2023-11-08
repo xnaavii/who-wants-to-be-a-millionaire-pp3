@@ -1,5 +1,7 @@
 from colorama import Style, Fore, Back, init
+
 init()
+
 
 def get_players_answer():
     """
@@ -9,11 +11,23 @@ def get_players_answer():
     valid_input = ["A", "B", "C", "D"]  # Inputs that are requested to continue
     while True:
         try:
-            player_answer = input(Style.DIM + "Choose an answer (A, B, C or D): " + Style.RESET_ALL).upper()
+            player_answer = (
+                input(
+                    Style.DIM + "Choose an answer (A, B, C or D): "
+                    + Style.RESET_ALL
+                )
+                .upper()
+                .strip()
+            )
             if player_answer in valid_input:
                 return player_answer
             else:
-                print(Fore.RED + "Invalid choice. " + Style.RESET_ALL + "Please enter A, B, C, or D.\n")
+                print(
+                    Fore.RED
+                    + "Invalid choice. "
+                    + Style.RESET_ALL
+                    + "Please enter A, B, C, or D.\n"
+                )
         except Exception as e:
             print(f"An error occurred: {e}")
 
@@ -26,11 +40,18 @@ def play_rules():
     while True:
         try:
             print("\nPlease select ", end="")
-            select_screen = input(Fore.MAGENTA + "[Play][Rules][Highscore]: " + Style.RESET_ALL).lower()
+            select_screen = (
+                input(
+                    Fore.MAGENTA + "[Play][Rules][Highscore]: "
+                    + Style.RESET_ALL
+                    )
+                .lower()
+                .strip()
+            )
             if select_screen in valid_response:
                 return select_screen
             else:
-                print(Fore.RED + "Invalid selection." + Style.RESET_ALL) 
+                print(Fore.RED + "Invalid selection." + Style.RESET_ALL)
         except Exception as e:
             print(f"An error occured: {e}")
 
@@ -47,7 +68,11 @@ def get_player_difficulty():
     valid_difficulty = ["easy", "normal", "hard"]
     while True:
         print("\nChoose difficulty ", end="")
-        difficulty = input(Fore.MAGENTA + "[Easy][Normal][Hard]: " + Style.RESET_ALL).lower()
+        difficulty = (
+            input(Fore.MAGENTA + "[Easy][Normal][Hard]: " + Style.RESET_ALL)
+            .lower()
+            .strip()
+        )
         if difficulty in valid_difficulty:
             return difficulty
         else:
@@ -60,11 +85,25 @@ def play_again(player_name):
     while True:
         try:
             print(Style.BRIGHT + f"{player_name}, ", end="")
-            play_again = input("Would you like to play again? [Yes][No]: " + Style.RESET_ALL).lower()
+            play_again = (
+                input(
+                    "Would you like to play again? [Yes][No]: "
+                    + Style.RESET_ALL
+                    )
+                .lower()
+                .strip()
+            )
             if play_again in play_again_response:
                 return play_again
             else:
-                print(Fore.RED + "\nInvalid selection. ", end="" + Style.RESET_ALL)
-                print(Style.DIM + "Please select [Yes] or [No]: \n" + Style.RESET_ALL)
+                print(
+                    Fore.RED + "\nInvalid selection. ", end=""
+                    + Style.RESET_ALL
+                    )
+                print(
+                    Style.DIM +
+                    "Please select [Yes] or [No]: \n"
+                    + Style.RESET_ALL
+                    )
         except Exception as e:
             print(f"An error occured: {e}")

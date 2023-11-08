@@ -16,6 +16,7 @@ from game.prizes import prizes
 
 init()
 
+
 def clear_terminal():
     if platform.system() == "Windows":
         os.system("cls")
@@ -28,7 +29,12 @@ def main():
     Main function with welcome screen and selection
     Starts the game after user inputs 'Play'
     """
-    print(Fore.CYAN + Style.BRIGHT + "\nWelcome to Who Wants To Be A Millionaire" + Style.RESET_ALL)
+    print(
+        Fore.CYAN
+        + Style.BRIGHT
+        + "\nWelcome to Who Wants To Be A Millionaire"
+        + Style.RESET_ALL
+    )
     time.sleep(0.3)
     select_screen = play_rules()
     time.sleep(0.3)
@@ -41,9 +47,19 @@ def main():
         game_setup()  # Game starts
     elif select_screen == "rules":
         clear_terminal()
-        print(Fore.GREEN + "\nRules for 'Who Wants to Be a Millionaire?' Game\n" + Style.RESET_ALL)
-        print(Fore.RED + "Objective: \n" + Style.RESET_ALL + "The objective of ", end="")
-        print("the game is to answer a series of multiple-choice questions ", end="")
+        print(
+            Fore.GREEN
+            + "\nRules for 'Who Wants to Be a Millionaire?' Game\n"
+            + Style.RESET_ALL
+        )
+        print(
+            Fore.RED +
+            "Objective: \n"
+            + Style.RESET_ALL +
+            "The objective of ", end=""
+        )
+        print("the game is to answer a series of ", end="")
+        print("multiple-choice questions ", end="")
         print("correctly to accumulate as much money as possible.\n")
         main()
     elif select_screen == "highscore":
@@ -80,16 +96,31 @@ def play_round(player_name, difficulty="easy"):
         questions = hard_questions
 
     random.shuffle(questions)
-    for question_data in questions:  # Questions from questions.py stored into variables
+    # Questions from questions.py stored into variables
+    for question_data in questions:
         time.sleep(0.7)
         clear_terminal()
         question = question_data["question"]
         choices = question_data["choices"]
         answer = question_data["answer"]
 
-        print(Fore.LIGHTBLUE_EX + "🕹️ Player: " + Style.RESET_ALL + f"{player_name}")
-        print(Fore.LIGHTBLUE_EX + "📈Difficulty: " + Style.RESET_ALL + f"{difficulty.capitalize()}")
-        print(Fore.LIGHTBLUE_EX + "💰Current score: " + Fore.GREEN + "$" + f"{score}\n" + Style.RESET_ALL)
+        print(
+            Fore.LIGHTBLUE_EX
+            + "🕹️ Player: "
+            + Style.RESET_ALL
+            + f"{player_name}")
+        print(
+            Fore.LIGHTBLUE_EX
+            + "Difficulty: "
+            + Style.RESET_ALL +
+            f"{difficulty.capitalize()}"
+        )
+        print(
+            Fore.LIGHTBLUE_EX
+            + "Current score: "
+            + Fore.GREEN +
+            f"${score}\n"
+            + Style.RESET_ALL)
         time.sleep(0.5)
         # Print the questions out
         print(Fore.LIGHTWHITE_EX + f"{question}\n" + Style.RESET_ALL)
@@ -102,17 +133,20 @@ def play_round(player_name, difficulty="easy"):
         player_answer = get_players_answer()
 
         # Statement to check if user answer matches
-        if player_answer == answer:  
+        if player_answer == answer:
             print(Style.DIM + "...\n")
             time.sleep(0.3)
             print("....\n" + Style.RESET_ALL)
             time.sleep(0.3)
             score = prizes[correct_answers]
             # Keep count of the correct answers
-            correct_answers += 1  
+            correct_answers += 1
             time.sleep(0.3)
             # Show player name and score during gameplay
-            print(Style.BRIGHT + f"Correct answer, {player_name}!\n" + Style.RESET_ALL)  
+            print(
+                Style.BRIGHT
+                + f"Correct answer, {player_name}!\n"
+                + Style.RESET_ALL)
             time.sleep(0.5)
             continue
         elif player_answer != answer:
@@ -120,17 +154,28 @@ def play_round(player_name, difficulty="easy"):
             time.sleep(0.3)
             print("....\n" + Style.RESET_ALL)
             time.sleep(0.3)
-            print(Fore.RED + f"Wrong answer" + Style.RESET_ALL)
-            print("\nCorrect answer was: " + Fore.GREEN + f"{answer}\n" + Style.RESET_ALL)
+            print(
+                Fore.RED
+                + f"Wrong answer"
+                + Style.RESET_ALL)
+            print(
+                "\nCorrect answer was: "
+                + Fore.GREEN
+                + f"{answer}\n"
+                + Style.RESET_ALL
+            )
         break
 
     if correct_answers == 10:  # Checks if all questions are answered
         score = 10000000
         print("Congratulations! You've won ", end="")
-        print(Fore.GREEN + f"${score}\n" + Style.RESET_ALL)    
+        print(Fore.GREEN + f"${score}\n" + Style.RESET_ALL)
     elif correct_answers >= 1:
-        print(f"{player_name}, you've secured at least ", end="") 
-        print(Fore.GREEN + f"${prizes[correct_answers -1]}.\n" + Style.RESET_ALL)
+        print(f"{player_name}, you've secured at least ", end="")
+        print(
+            Fore.GREEN
+            + f"${prizes[correct_answers -1]}.\n"
+            + Style.RESET_ALL)
     else:
         print("Sorry, you didn't win anything.\n")
     append_highscore(player_name, difficulty, score)
@@ -147,6 +192,7 @@ def play_round(player_name, difficulty="easy"):
         clear_terminal()
         # Quit the game after user input
         quit_game()
+
 
 def quit_game():
     # Function to quit the game
