@@ -6,7 +6,7 @@ The "Who Wants to Be a Millionaire Quiz" is a browser-based quiz game developed 
 
 This game was developed in Python for use in the terminal and utilizes the Code Institute Python Template to create a "terminal" interface within a web browser.
 
-View the live website on [Heroku](https://pp3-xnaavii-7fb7fc60cf9d.herokuapp.com/) 
+View the live website on [Heroku](https://pp3-xnaavii-195de07d9d87.herokuapp.com/) 
 
 ## UX
 
